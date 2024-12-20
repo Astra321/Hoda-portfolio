@@ -1,0 +1,459 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --editor-bg: #1E1E1E;
+  --comment-color: #FFD700;
+  --variable-color: #40E0D0;
+  --text-color: #D4D4D4;
+  --line-number-color: #858585;
+}
+
+@font-face {
+  font-family: 'Source Code Pro';
+  src: url('https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@400;500;600&display=swap');
+}
+
+body {
+  background-color: var(--editor-bg);
+  color: var(--text-color);
+  font-family: 'Source Code Pro', monospace;
+  line-height: 1.5;
+}
+
+.grid-overlay {
+  background-image: linear-gradient(rgba(255, 255, 255, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.05) 1px, transparent 1px);
+  background-size: 20px 20px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0.5;
+}
+
+.code-container {
+  position: relative;
+  padding-left: 3rem;
+}
+
+.line-numbers {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 3rem;
+  border-right: 1px solid #333;
+  color: var(--line-number-color);
+  user-select: none;
+  font-size: 0.875rem;
+  text-align: right;
+  padding-right: 0.5rem;
+}
+
+.comment {
+  color: var(--comment-color);
+}
+
+.variable {
+  color: var(--variable-color);
+}
+
+.pixel-title {
+  font-family: 'Press Start 2P', cursive;
+  color: var(--variable-color);
+}
+
+.nav-link {
+  position: relative;
+  color: var(--text-color);
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.nav-link::before {
+  content: '.';
+  color: var(--variable-color);
+  position: absolute;
+  left: -0.8em;
+}
+
+.nav-link:hover {
+  color: var(--variable-color);
+}
+
+.pixel-button {
+  background-color: var(--variable-color);
+  color: var(--editor-bg);
+  border: none;
+  padding: 0.5rem 1rem;
+  font-family: 'Source Code Pro', monospace;
+  cursor: pointer;
+  transition: opacity 0.3s;
+}
+
+.pixel-button:hover {
+  opacity: 0.9;
+}
+
+.pixel-input {
+  background-color: transparent;
+  border: 1px solid #333;
+  color: var(--text-color);
+  padding: 0.5rem;
+  width: 100%;
+  font-family: 'Source Code Pro', monospace;
+}
+
+.pixel-input:focus {
+  outline: none;
+  border-color: var(--variable-color);
+}
+
+.section-title {
+  font-size: 2rem;
+  margin-bottom: 2rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.section-title::before {
+  content: '{" ';
+  color: white;
+}
+
+.section-title::after {
+  content: ' "}';
+  color: white;
+}
+
+.portfolio-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 2rem;
+}
+
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+}
+
+.contact-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+}
+
+@media (max-width: 768px) {
+  .contact-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.hero-content {
+  position: relative;
+  z-index: 10;
+}
+
+.map-container {
+  position: relative;
+  width: 100%;
+  height: 450px;
+  border-radius: 0.5rem;
+  overflow: hidden;
+  border: 1px solid #333;
+}
+
+.map-container iframe {
+  filter: invert(90%) hue-rotate(180deg);
+}
+
+.map-container::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(30, 30, 30, 0.1);
+  pointer-events: none;
+}
+
+/* Glitch Effect */
+.glitch {
+  position: relative;
+  text-shadow: 0.05em 0 0 #00fffc, -0.03em -0.04em 0 #fc00ff,
+                0.025em 0.04em 0 #fffc00;
+  animation: glitch 725ms infinite;
+}
+
+.glitch span {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.glitch::before,
+.glitch::after {
+  content: attr(data-text);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.glitch::before {
+  left: 2px;
+  text-shadow: -2px 0 #ff00c1;
+  clip: rect(44px, 450px, 56px, 0);
+  animation: glitch-anim 5s infinite linear alternate-reverse;
+}
+
+.glitch::after {
+  left: -2px;
+  text-shadow: -2px 0 #00fff9, 2px 2px #ff00c1;
+  animation: glitch-anim2 1s infinite linear alternate-reverse;
+}
+
+@keyframes glitch {
+  0% {
+    text-shadow: 0.05em 0 0 #00fffc, -0.03em -0.04em 0 #fc00ff,
+                 0.025em 0.04em 0 #fffc00;
+  }
+  15% {
+    text-shadow: 0.05em 0 0 #00fffc, -0.03em -0.04em 0 #fc00ff,
+                 0.025em 0.04em 0 #fffc00;
+  }
+  16% {
+    text-shadow: -0.05em -0.025em 0 #00fffc, 0.025em 0.035em 0 #fc00ff,
+                 -0.05em -0.05em 0 #fffc00;
+  }
+  49% {
+    text-shadow: -0.05em -0.025em 0 #00fffc, 0.025em 0.035em 0 #fc00ff,
+                 -0.05em -0.05em 0 #fffc00;
+  }
+  50% {
+    text-shadow: 0.05em 0.035em 0 #00fffc, 0.03em 0 0 #fc00ff,
+                 0 -0.04em 0 #fffc00;
+  }
+  99% {
+    text-shadow: 0.05em 0.035em 0 #00fffc, 0.03em 0 0 #fc00ff,
+                 0 -0.04em 0 #fffc00;
+  }
+  100% {
+    text-shadow: -0.05em 0 0 #00fffc, -0.025em -0.04em 0 #fc00ff,
+                 -0.04em -0.025em 0 #fffc00;
+  }
+}
+
+/* Terminal Text Effect */
+.terminal-text {
+  font-family: 'Source Code Pro', monospace;
+  line-height: 1.5;
+  white-space: pre-wrap;
+}
+
+.terminal-text .cursor {
+  animation: blink 1s step-end infinite;
+}
+
+@keyframes blink {
+  from, to {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+}
+
+/* Scan Line Effect */
+.scan-line {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    rgba(64, 224, 208, 0.1) 50%,
+    transparent 100%
+  );
+  animation: scan 8s linear infinite;
+  pointer-events: none;
+  z-index: 1;
+}
+
+@keyframes scan {
+  0% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateY(100%);
+  }
+}
+
+/* Hover Effects for Cards */
+.cyber-card {
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.cyber-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    45deg,
+    transparent 0%,
+    rgba(64, 224, 208, 0.1) 50%,
+    transparent 100%
+  );
+  transform: translateX(-100%);
+  transition: transform 0.6s ease;
+}
+
+.cyber-card:hover::before {
+  transform: translateX(100%);
+}
+
+/* Neon Button Effects */
+.neon-button {
+  position: relative;
+  padding: 0.75rem 1.5rem;
+  border: 2px solid;
+  background: transparent;
+  font-family: 'Source Code Pro', monospace;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  font-weight: bold;
+  transition: all 0.3s;
+  cursor: pointer;
+}
+
+.neon-cyan {
+  color: #0ff;
+  border-color: #0ff;
+  text-shadow: 0 0 0.125em rgba(0, 255, 255, 0.3), 0 0 0.45em currentColor;
+  box-shadow: inset 0 0 0.5em 0 #0ff, 0 0 0.5em 0 #0ff;
+}
+
+.neon-yellow {
+  color: #ff0;
+  border-color: #ff0;
+  text-shadow: 0 0 0.125em rgba(255, 255, 0, 0.3), 0 0 0.45em currentColor;
+  box-shadow: inset 0 0 0.5em 0 #ff0, 0 0 0.5em 0 #ff0;
+}
+
+.neon-magenta {
+  color: #f0f;
+  border-color: #f0f;
+  text-shadow: 0 0 0.125em rgba(255, 0, 255, 0.3), 0 0 0.45em currentColor;
+  box-shadow: inset 0 0 0.5em 0 #f0f, 0 0 0.5em 0 #f0f;
+}
+
+.neon-button:hover {
+  background: currentColor;
+  color: var(--editor-bg);
+}
+
+/* Animated Background Grid */
+.cyber-grid {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-size: 50px 50px;
+  background-image: 
+    linear-gradient(to right, rgba(64, 224, 208, 0.1) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(64, 224, 208, 0.1) 1px, transparent 1px);
+  animation: grid-move 20s linear infinite;
+  pointer-events: none;
+  z-index: 0;
+}
+
+@keyframes grid-move {
+  0% {
+    transform: translate(0, 0);
+  }
+  100% {
+    transform: translate(-50px, -50px);
+  }
+}
+
+/* Glowing Text Effect */
+.glow-text {
+  color: #fff;
+  text-shadow: 
+    0 0 7px #fff,
+    0 0 10px #fff,
+    0 0 21px #fff,
+    0 0 42px var(--variable-color),
+    0 0 82px var(--variable-color),
+    0 0 92px var(--variable-color),
+    0 0 102px var(--variable-color),
+    0 0 151px var(--variable-color);
+  animation: glow 1.5s ease-in-out infinite alternate;
+}
+
+@keyframes glow {
+  from {
+    text-shadow: 
+      0 0 7px #fff,
+      0 0 10px #fff,
+      0 0 21px #fff,
+      0 0 42px var(--variable-color),
+      0 0 82px var(--variable-color),
+      0 0 92px var(--variable-color),
+      0 0 102px var(--variable-color),
+      0 0 151px var(--variable-color);
+  }
+  to {
+    text-shadow: 
+      0 0 4px #fff,
+      0 0 7px #fff,
+      0 0 18px #fff,
+      0 0 38px var(--variable-color),
+      0 0 73px var(--variable-color),
+      0 0 80px var(--variable-color),
+      0 0 94px var(--variable-color),
+      0 0 140px var(--variable-color);
+  }
+}
+
+/* Add to your existing styles */
+.pixel-loading {
+  width: 50px;
+  height: 50px;
+  background: var(--variable-color);
+  position: relative;
+  animation: pixel-spin 1s linear infinite;
+}
+
+.pixel-loading::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 20px;
+  height: 20px;
+  background: var(--editor-bg);
+}
+
+@keyframes pixel-spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
